@@ -1,15 +1,8 @@
-import Api from "../common/Api";
-import Auth from "../common/Auth";
+import Config from "../common/Config";
 import Form from "../common/Form";
-import Token from "../common/Token";
-import User from "../common/User";
 
 export interface IUtil {
   Form?: () => Form;
-  Token?: () => Token;
-  Api?: () => Api;
-  User?: () => User;
-  Auth?: () => Auth;
-
+  Config?: () => Config;
   [key: string]: any;
 }

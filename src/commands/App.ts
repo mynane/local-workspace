@@ -26,3 +26,23 @@ export class HomeCommand extends JKModule {
     await this.ctx?.Website?.Home();
   };
 }
+
+@Command({
+  command: "start",
+  description: "start server",
+})
+export class ServiceStartCommand extends JKModule {
+  public action = async () => {
+    await this.ctx?.Server?.start();
+  };
+}
+
+@Command({
+  command: "stop",
+  description: "stop server",
+})
+export class ServiceStopCommand extends JKModule {
+  public action = async () => {
+    await this.ctx?.Server?.stop();
+  };
+}

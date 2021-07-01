@@ -18,5 +18,5 @@ module.exports = {
     "no-empty-function": "off",
     "no-async-promise-executor": "off",
   },
-  ignorePatterns: ["dist"],
+  ignorePatterns: ["dist", "public"],
 };

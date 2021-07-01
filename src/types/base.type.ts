@@ -1,12 +1,7 @@
-import Api from "../common/Api";
-import Auth from "../common/Auth";
 import Config from "../common/Config";
 import Form from "../common/Form";
 import Loading from "../common/Loading";
-import Login from "../common/Login";
-import Module from "../common/Module";
-import Token from "../common/Token";
-import User from "../common/User";
+import Server from "../common/Server";
 import Version from "../common/Version";
 import Website from "../common/Website";
 
@@ -20,15 +15,10 @@ export interface IBase {
 }
 
 export interface IContext {
-  Login?: Login;
-  Api?: Api;
-  Module?: Module;
   Form?: Form;
-  Auth?: Auth;
-  User?: User;
-  Token?: Token;
+  Config?: Config;
   Loading?: Loading;
   Version?: Version;
-  Config?: Config;
   Website?: Website;
+  Server?: Server;
 }
