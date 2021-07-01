@@ -19,7 +19,7 @@ var old = window.fetch;
 window.fetch = function() {
   var now = new Date();
   return old.apply(this, arguments).then(response => {
-    if (!/\.(js|css|map)$/.test(response.url)) {
+    if (!/\\.(js|css|map)$/.test(response.url)) {
       const args = arguments[1] ?? { method: 'GET' };
       response
         .clone()
