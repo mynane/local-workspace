@@ -16,13 +16,31 @@ ws.onerror = function (e) {
 
 var old = window.fetch;
 
-window.fetch = function () {
-  return old.apply(this, arguments).then((response) => {
-    console.log(response.clone().json());
+window.fetch = function() {
+  var now = new Date();
+  return old.apply(this, arguments).then(response => {
+    if (!/\.(js|css|map)$/.test(response.url)) {
+      const args = arguments[1] ?? { method: 'GET' };
+      response
+        .clone()
+        .json()
+        .then(res => {
+          ws.send(
+            JSON.stringify({
+              time: new Date() - now,
+              url: arguments[0] || response.url,
+              method: args.method,
+              data: JSON.parse(args.body || '{}'),
+              body: res,
+            }),
+          );
+        });
+    }
 
     return response;
   });
 };
+
 </script>`;
 
 export default templates;

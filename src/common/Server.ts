@@ -28,13 +28,12 @@ class Server extends JKUtil {
   public async stop(doc = "") {
     try {
       await checkApi();
-      child_process.exec(`pm2 delete local-workspace`, function (err, data) {
+      child_process.exec(`pm2 stop local-workspace && pm2 delete local-workspace`, function (err, data) {
         if (!err) {
           console.log(chalk.blue("local-workspace stoped"));
         }
       });
     } catch (error) {
-      console.log("error: ", error);
       console.log(chalk.blue("local-workspace stoped"));
     }
   }

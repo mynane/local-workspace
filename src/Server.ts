@@ -59,7 +59,7 @@ app.ws.use(
     });
   })
 );
-console.log(__dirname);
+
 app.use(staticServer("./public", { extensions: ["html"] }));
 
 router.get("/api/apis", async (ctx) => {
