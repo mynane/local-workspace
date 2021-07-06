@@ -38,22 +38,24 @@ app.ws.use(
     /**接收消息*/
     ctx.websocket.on("message", function (message: string) {
       if (message.indexOf('"method":') > -1) {
-        const js = JSON.parse(message);
-        const { pathname, search } = new url.URL(js.url);
-        const query = qs.parse(search.indexOf("?") > -1 ? search.substr(1) : "") || {};
-        const old = temp[`${js.method} ${pathname}`] || {};
+        try {
+          const js = JSON.parse(message);
+          const { pathname, search } = new url.URL(js.url);
+          const query = qs.parse(search.indexOf("?") > -1 ? search.substr(1) : "") || {};
+          const old = temp[`${js.method} ${pathname}`] || {};
 
-        temp[`${js.method} ${pathname}`] = {
-          ...old,
-          ...js,
-          time: ((old.time || js.time) + js.time) / 2,
-          pathname,
-          query: { ...old, ...query },
-          date: (new Date() as any) * 1,
-        };
-        fs.writeFile(filepath, JSON.stringify(temp), (err: any) => {
-          console.log(err);
-        });
+          temp[`${js.method} ${pathname}`] = {
+            ...old,
+            ...js,
+            time: ((old.time || js.time) + js.time) / 2,
+            pathname,
+            query: { ...old, ...query },
+            date: (new Date() as any) * 1,
+          };
+          fs.writeFile(filepath, JSON.stringify(temp), (err: any) => {
+            console.log(err);
+          });
+        } catch (error) {}
       }
       ctx.websocket.send("ok");
     });

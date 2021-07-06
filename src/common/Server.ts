@@ -14,6 +14,7 @@ class Server extends JKUtil {
       console.log(chalk.blue("start api server: http://localhost:41414"));
     } catch (error) {
       child_process.exec(`pm2 start dist/Server.js --name local-workspace`, function (err, data) {
+        console.log("err: ", err);
         console.log("data: ", data);
         if (!err) {
           console.log(chalk.blue("start api server: http://localhost:41414"));
